@@ -46,6 +46,7 @@ Node* insertEnd(Node* head, int key)
 // Slow and fast pointer approach.
 float interQuartile(Node* head)
 {
+    int cnt = 0;
     Node* fast_ptr = head;
     Node* Q1_ptr = head;
     Node* Q3_ptr = head->next;
@@ -54,7 +55,12 @@ float interQuartile(Node* head)
         Q1_ptr = Q1_ptr->next;
         Q3_ptr = Q3_ptr->next->next;
         fast_ptr = fast_ptr->next->next->next;
+        cnt += 3;
     }
-    
-    return Q3_ptr->value-Q1_ptr->value;   
+    cnt++;
+
+    if(cnt % 2 == 1)
+        return Q3_ptr->value-Q1_ptr->value;
+    else if(cnt % 2 == 0)
+        return Q3_ptr->value/2;
 }
