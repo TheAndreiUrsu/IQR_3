@@ -1,4 +1,8 @@
 /*
+
+*/
+
+/*
     Interquartile Range
 
     Given a sorted singly linked list without a tail (e.g, head -> 1 -> 2 -> 3 -> 4), 
@@ -39,11 +43,18 @@ Node* insertEnd(Node* head, int key)
     return head;
 }
 
+// Slow and fast pointer approach.
 float interQuartile(Node* head)
 {
-    Node* curr = head;
-    while(curr != nullptr){
-        
+    Node* fast_ptr = head;
+    Node* Q1_ptr = head;
+    Node* Q3_ptr = head->next;
+
+    while(fast_ptr != nullptr && fast_ptr->next != nullptr){
+        Q1_ptr = Q1_ptr->next;
+        Q3_ptr = Q3_ptr->next->next;
+        fast_ptr = fast_ptr->next->next->next;
     }
-    return 0.0;   
+    
+    return Q3_ptr->value-Q1_ptr->value;   
 }
