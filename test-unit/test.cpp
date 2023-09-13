@@ -46,7 +46,7 @@ TEST_CASE("Function: IQR 3", "[output_hidden]") {
 	for(int i: v)
 		head = insertEnd(head, i);
 
-	REQUIRE(interQuartile(head) == 2411);
+	REQUIRE(interQuartile(head) == 2411.00);
 	
     while (head != nullptr) 
     {
@@ -62,7 +62,7 @@ TEST_CASE("Function: IQR 4", "[output_hidden]") {
 	for(int i: v)
 		head = insertEnd(head, i);
 
-	REQUIRE(interQuartile(head) == 4.5);
+	REQUIRE(interQuartile(head) == 4.50);
 	
     while (head != nullptr) 
     {
@@ -78,7 +78,7 @@ TEST_CASE("Function: IQR 5", "[output_hidden]") {
 	for(int i: v)
 		head = insertEnd(head, i);
 
-	REQUIRE(interQuartile(head) == 55330);
+	REQUIRE(interQuartile(head) == 55330.00);
 	
     while (head != nullptr) 
     {
