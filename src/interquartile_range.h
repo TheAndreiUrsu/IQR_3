@@ -64,8 +64,8 @@ float interQuartile(Node* head)
             //Q1_prev = Q1_ptr->value;
             Q1_ptr = Q1_ptr->next;
         }
-        if(fast_cnt % 2 == 0){
-            Q3_ptr = Q3_ptr->next->next;
+        else if(fast_cnt % 2 == 0){
+            Q3_ptr = Q3_ptr->next->next->next;
         }
 
     }
