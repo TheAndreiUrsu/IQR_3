@@ -43,42 +43,43 @@ Node* insertEnd(Node* head, int key)
 float interQuartile(Node* head)
 {
     Node* fast_ptr = head; // Moves 4 at a time.
-    Node* Q1_ptr = head; // Moves once every time fast_ptr moves.
-    Node* Q3_ptr = head; // Moves twice every time Q1_ptr moves.
+    Node* Q1_ptr = head;
+    Node* Q3_ptr = head;
 
-    //int Q1_prev = 0, Q3_prev = 0;
-    
-    int len = 0; // Stores the length of the list to determine which case to do.
-    int fast_cnt = 0;
+    int Q1_half = 0, Q3_half = 0;
+
+    int len_half = 0, fast_cnt = 0;
+
+    bool move_median = false;
 
     while(fast_ptr != nullptr){ // Traversing through the list once, O(n) time complexity and O(1) space complexity.
-        
-        std::cout << "fast ptr: " << fast_ptr->value << std::endl;
-        std::cout << "Q3: " << Q3_ptr->value << std::endl;
-        
         fast_ptr = fast_ptr->next;
         fast_cnt++;
-        len++;
 
-        if(fast_cnt % 4 == 0){ // Everytime fast pointer moves 4 times, move the Q1 pointer.
-            //Q1_prev = Q1_ptr->value;
+        if(move_median){
+            len_half++; // keeps track of sub list length
+        }
+        move_median = !move_median;
+
+        if(fast_cnt % 4 == 0){ // every 4 times fast pointer moves, move q1 pointer once
+            Q1_half = Q1_ptr->value;
             Q1_ptr = Q1_ptr->next;
         }
-        else if(fast_cnt % 2 == 0){
-            Q3_ptr = Q3_ptr->next->next->next;
+        else if(fast_cnt % 3 == 0){
+            Q3_half = Q3_ptr->value;
+            Q3_ptr = Q3_ptr->next;
         }
 
     }
 
-    std::cout << "Q1: " << Q1_ptr->value << ", Q3: " << Q3_ptr->value << ", Length: " << len << std::endl;
+    std::cout << "Length of 1/2 list: " << len_half << std::endl;
+    if(len_half % 2 == 0){
+        std::cout << "Q1: " << (static_cast<float>(Q1_half) + Q1_ptr->value)/2 << ", Q3: " << (static_cast<float>(Q3_half) + Q3_ptr->value)/2 << std::endl;
+    }
+    else{
+        std::cout << "Q1: " << Q1_ptr->value << ", Q3: " << Q3_ptr->value << std::endl;
+    }
 
-    // if(len % 2 == 0)
-    //      std::cout << "Q1_prev: " << Q1_prev << ", Q1: " << Q1_ptr->value << ", Q3_prev: " << Q3_prev << ", Q3: " << Q3_ptr->value << ", Length: " << len << std::endl;
-    // else
-    //      std::cout << "Q1: " << Q1_ptr->value << ", Q3: " << Q3_ptr->value << ", Length: " << len << std::endl;
+    return 0;
 
-    if(len % 2 == 0) // Even case.
-        return -1; //return ((static_cast<float>(Q3_prev) + Q3_ptr->value)/2 - (static_cast<float>(Q1_prev) + Q1_ptr->value)/2);
-    else // Odd case.
-        return 0; //return Q3_ptr->value - Q1_ptr->value;
 }
