@@ -46,7 +46,7 @@ TEST_CASE("Function: IQR 3", "[output_hidden]") {
 	for(int i: v)
 		head = insertEnd(head, i);
 
-	REQUIRE(interQuartile(head) == 2411);
+	REQUIRE(interQuartile(head) == 2441.00);
 	
     while (head != nullptr) 
     {
@@ -57,12 +57,12 @@ TEST_CASE("Function: IQR 3", "[output_hidden]") {
 } 
 
 TEST_CASE("Function: IQR 4", "[output_hidden]") {
-	std::vector<int> v = {2, 4, 4, 5, 6, 7, 8, 9, 10};
+	std::vector<int> v = {2, 4, 4, 5, 6, 7, 8, 9, 10, 11, 28, 29, 30, 41};
 	Node* head = nullptr;
 	for(int i: v)
 		head = insertEnd(head, i);
 
-	REQUIRE(interQuartile(head) == 4.5);
+	REQUIRE(interQuartile(head) == 23.00);
 	
     while (head != nullptr) 
     {
@@ -78,7 +78,23 @@ TEST_CASE("Function: IQR 5", "[output_hidden]") {
 	for(int i: v)
 		head = insertEnd(head, i);
 
-	REQUIRE(interQuartile(head) == 55330);
+	REQUIRE(interQuartile(head) == 55330.00);
+	
+    while (head != nullptr) 
+    {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
+TEST_CASE("Function: IQR 6", "[output_hidden]") {
+	std::vector<int> v = {1, 8, 15, 43, 82, 101, 110, 2456, 55345, 137556, 137576, 9999999, 999999999};
+	Node* head = nullptr;
+	for(int i: v)
+		head = insertEnd(head, i);
+
+	REQUIRE(interQuartile(head) == 137537.0);
 	
     while (head != nullptr) 
     {
